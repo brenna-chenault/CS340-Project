@@ -44,72 +44,74 @@
     </nav>
    
     <!-- table of data-->
-    <br />
-    <h2>Warehouses Table</h2>
-    <table id="warehousesTable" class="table table-hover">
-        <thead>
-            <th>warehouse_id</th>
-            <th>street_address</th>
-            <th>city</th>
-            <th>state</th>
-            <th>zip</th>
-        </thead>
-        <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
-        <tbody id="warehousesEntries">
-            <tr>
-                <th scope="row">1</th>
-                <td>4390 Skateboard Lane</td>
-                <td>Houston</td>
-                <td>Texas</td>
-                <td>77001</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>201 Band Street</td>
-                <td>Seattle</td>
-                <td>Washington</td>
-                <td>98101</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>4543 Docks Ave</td>
-                <td>New York</td>
-                <td>New York</td>
-                <td>10022</td>
-            </tr>
-        </tbody>
-    </table>
-    
-<!--insert row-->
-    <br />
-    <h2>Insert</h2>
-    
-    <form>
-        <div class="form-group">
-            <label>street_address<input type="text" name="street_address" value="" /></label>
-            <label>city<input type="text" name="city" value="" /></label>
-            <label>state<input type="text" name="state" value="" /></label>
-            <label>zip<input type="text" name="zip" value="" /></label>
-            <input type="button" id="newRow" value="Insert Warehouse" class="btn btn-primary"/>
-        </div>
-        <form id="insertWarehouse">
-    </form>
+    <div class="ml-5">
+        <br />
+        <h2>Warehouses Table</h2>
+        <table id="warehousesTable" class="table table-hover w-50">
+            <thead>
+                <th>warehouse_id</th>
+                <th>street_address</th>
+                <th>city</th>
+                <th>state</th>
+                <th>zip</th>
+            </thead>
+            <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
+            <tbody id="warehousesEntries">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>4390 Skateboard Lane</td>
+                    <td>Houston</td>
+                    <td>Texas</td>
+                    <td>77001</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>201 Band Street</td>
+                    <td>Seattle</td>
+                    <td>Washington</td>
+                    <td>98101</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>4543 Docks Ave</td>
+                    <td>New York</td>
+                    <td>New York</td>
+                    <td>10022</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    <!--insert row-->
+        <br />
+        <h2>Insert</h2>
+        
+        <form>
+            <div class="form-group">
+                <label>street_address<input type="text" name="street_address" value="" /></label>
+                <label>city<input type="text" name="city" value="" /></label>
+                <label>state<input type="text" name="state" value="" /></label>
+                <label>zip<input type="text" name="zip" value="" /></label>
+                <input type="button" id="newRow" value="Insert Warehouse" class="btn btn-primary"/>
+            </div>
+            <form id="insertWarehouse">
+        </form>
 
-    <br />
-    <h2>Select by State</h2>
+        <br />
+        <h2>Select by State</h2>
 
-    <form>
-        <div class="form-group">
-            <label for="">state</label>
-            <select multiple class="form-control" id="">
-              <option>New York</option>
-              <option>Texas</option>
-              <option>Washington</option>
-            </select>
-            <input type="button" id="newRow" value="Select Warehouses" class="btn btn-primary btn-block"/>
-        </div>
-        <form id="selectWarehouse">
-    </form>
+        <form>
+            <div class="form-group">
+                <label for="">state</label>
+                <select multiple class="form-control w-25" id="">
+                <option>New York</option>
+                <option>Texas</option>
+                <option>Washington</option>
+                </select>
+                <input type="button" id="newRow" value="Select Warehouses" class="btn btn-primary"/>
+            </div>
+            <form id="selectWarehouse">
+        </form>
+    </div>
 
     <!-- bootstrap javascript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

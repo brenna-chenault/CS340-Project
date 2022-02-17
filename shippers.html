@@ -44,40 +44,42 @@
     </nav>
    
     <!-- table of data-->
-    <br />
-    <h2>Shippers Table</h2>
-    <table id="shippersTable" class="table table-hover">
-        <thead>
-            <th>shipper_id</th>
-            <th>shipper_name</th>
-            <th>shipper_account_num</th>
-            <th>shipper_contact_name</th>
-            <th>shipper_contact_email</th>
-        </thead>
-        <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
-        <tbody id="shippersEntries">
-            <tr>
-                <th scope="row">1</th>
-                <td>FedEx</td>
-                <td>5346546</td>
-                <td>Jane Person</td>
-                <td>jane@fedex.com</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>UPS</td>
-                <td>234890-A32</td>
-                <td>John Person</td>
-                <td>john@ups.com</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>DHL</td>
-                <td>987235987</td>
-                <td>Some Name</td>
-                <td>some.name@DHL.com</td>
-            </tr>
-        </tbody>
+    <div class="ml-5">
+        <br />
+        <h2>Shippers Table</h2>
+        <table id="shippersTable" class="table table-hover w-50">
+            <thead>
+                <th>shipper_id</th>
+                <th>shipper_name</th>
+                <th>shipper_account_num</th>
+                <th>shipper_contact_name</th>
+                <th>shipper_contact_email</th>
+            </thead>
+            <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
+            <tbody id="shippersEntries">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>FedEx</td>
+                    <td>5346546</td>
+                    <td>Jane Person</td>
+                    <td>jane@fedex.com</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>UPS</td>
+                    <td>234890-A32</td>
+                    <td>John Person</td>
+                    <td>john@ups.com</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>DHL</td>
+                    <td>987235987</td>
+                    <td>Some Name</td>
+                    <td>some.name@DHL.com</td>
+                </tr>
+            </tbody>
+        </div>
     </table>
     
 <!--insert row-->
@@ -101,12 +103,13 @@
     <form>
         <div class="form-group">
             <label for="">shipper_id</label>
-            <select multiple class="form-control" id="">
+            <select multiple class="form-control w-25" id="">
               <option>1</option>
               <option>2</option>
               <option>3</option>
             </select>
-            <input type="button" id="newRow" value="Delete Shipper" class="btn btn-primary btn-block"/>
+        </br>
+            <input type="button" id="newRow" value="Delete Shipper" class="btn btn-primary"/>
         </div>
         <form id="deleteShipper">
     </form>

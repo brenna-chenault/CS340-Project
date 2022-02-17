@@ -44,76 +44,78 @@
     </nav>
    
     <!-- table of data-->
-    <br />
-    <h2>Ordered_Products Table</h2>
-    <table id="orderedProductsTable" class="table table-hover">
-        <thead>
-            <th>order_product_id</th>
-            <th>order_id</th>
-            <th>product_id</th>
-            <th>number_ordered</th>
-            <th>ordered_cost</th>
-        </thead>
-        <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
-        <tbody id="orderedProductsEntries">
-            <tr>
-                <th scope="row">1</th>
-                <td>1</td>
-                <td>2</td>
-                <td>465</td>
-                <td>11,620.35</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>3</td>
-                <td>1</td>
-                <td>8</td>
-                <td>3,948.16</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>2</td>
-                <td>3</td>
-                <td>19,455</td>
-                <td>972,750,194.55</td>
-            </tr>
-        </tbody>
-    </table>
-    
-<!--insert row-->
-    <br />
-    <h2>Insert</h2>
-    
-    <form>
-        <div class="form-group">
-            <label>order_id<input type="text" name="order_id" value="" /></label>
-            <label>product_id<input type="text" name="product_id" value="" /></label>
-            <label>number_ordered<input type="number" name="number_ordered" value="" /></label>
-            <label>ordered_cost<input type="number" name="ordered_cost" value="" /></label>
-            <input type="button" id="newRow" value="Insert Ordered_Product" class="btn btn-primary"/>
-        </div>
-        <form id="insertOrderedProduct">
-    </form>
-    
-    <br />
-    <h2>Delete Row</h2>
+    <div class="ml-5">
+        <br />
+        <h2>Ordered_Products Table</h2>
+        <table id="orderedProductsTable" class="table table-hover w-50">
+            <thead>
+                <th>order_product_id</th>
+                <th>order_id</th>
+                <th>product_id</th>
+                <th>number_ordered</th>
+                <th>ordered_cost</th>
+            </thead>
+            <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
+            <tbody id="orderedProductsEntries">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>465</td>
+                    <td>11,620.35</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>8</td>
+                    <td>3,948.16</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>19,455</td>
+                    <td>972,750,194.55</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    <!--insert row-->
+        <br />
+        <h2>Insert</h2>
+        
+        <form>
+            <div class="form-group">
+                <label>order_id  <input type="text" name="order_id" value="" /></label>
+                <label>product_id  <input type="text" name="product_id" value="" /></label>
+                <label>number_ordered  <input type="number" name="number_ordered" value="" /></label>
+                <label>ordered_cost  <input type="number" name="ordered_cost" value="" /></label>
+                <input type="button" id="newRow" value="Insert Ordered_Product" class="btn btn-primary"/>
+            </div>
+            <form id="insertOrderedProduct">
+        </form>
+        
+        <br />
+        <h2>Delete Row</h2>
+        <form>
+            <div class="form-group">
+                <label for="deleteOrderProductID" class="col-form-label">order_product_id</label>
+                    <select multiple class="form-control w-25" id="deleteOrderProductID">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                    <br />
+                <input type="button" id="newRow" value="Delete Ordered_Product" class="btn btn-primary"/>
+            </div>
+            <form id="deleteOrderedProduct">
+        </form>
 
-    <form>
-        <div class="form-group">
-            <label for="">order_product_id</label>
-            <select multiple class="form-control" id="">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
-            <input type="button" id="newRow" value="Delete Ordered_Product" class="btn btn-primary btn-block"/>
-        </div>
-        <form id="deleteOrderedProduct">
-    </form>
-
-    <!-- bootstrap javascript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- bootstrap javascript -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>

@@ -44,105 +44,108 @@
     </nav>
    
     <!-- table of data-->
-    <br />
-    <h2>Orders Table</h2>
-    <table id="ordersTable" class="table table-hover">
-        <thead>
-            <th>order_id</th>
-            <th>manufacturer_id</th>
-            <th>shipper_id</th>
-            <th>time_placed</th>
-            <th>status</th>
-            <th>warehouse_id</th>
-        </thead>
-        <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
-        <tbody id="ordersEntries">
-            <tr>
-                <th scope="row">1</th>
-                <td>2</td>
-                <td>NULL</td>
-                <td>02/01/2022 23:19 UTC</td>
-                <td>confirmed-paid</td>
-                <td>NULL</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>1</td>
-                <td>1</td>
-                <td>01/01/2002 13:15 UTC</td>
-                <td>confirmed-unpaid</td>
-                <td>NULL</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>3</td>
-                <td>3</td>
-                <td>07/04/2077 17:56 UTC</td>
-                <td>placed</td>
-                <td>2</td>
-            </tr>
-        </tbody>
-    </table>
-    
-<!--insert row-->
-    <br />
-    <h2>Insert</h2>
-    
-    <form class="form-inline">
-        <div class="form-group">
-            <label>order_id<input type="text" name="order_id" value="" /></label>
-            <label>manufacturer_id<input type="text" name="manufacturer_id" value="" /></label>
-            <label>shipper_id<input type="text" name="shipper_id" value="" /></label>
-            <label>time_placed<input type="datetime-local" name="time_placed" value="" /></label>
-            <label>status</label>
-            <select class="form-control" id="orderStatusSelect">
-                <option selected></option>
-                <option>placed</option>
-                <option>confirmed-unpaid</option>
-                <option>confirmed-paid</option>
-                <option>fulfilled-unpaid</option>
-                <option>fulfilled-paid</option>
-            </select>
-            
-            <label>warehouse_id<input type="text" name="warehouse_id" value="" /></label>
-            <input type="button" id="newRow" value="Insert Order" class="btn btn-primary"/>
-        </div>
-        <form id="insertOrder">
-    </form>
+    <div class="ml-5">
+        <br />
+        <h2>Orders Table</h2>
+            <table id="ordersTable" class="table table-hover w-50">
+                <thead>
+                    <th>order_id</th>
+                    <th>manufacturer_id</th>
+                    <th>shipper_id</th>
+                    <th>time_placed</th>
+                    <th>status</th>
+                    <th>warehouse_id</th>
+                </thead>
+                <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
+                <tbody id="ordersEntries">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>NULL</td>
+                        <td>02/01/2022 23:19 UTC</td>
+                        <td>confirmed-paid</td>
+                        <td>NULL</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>01/01/2002 13:15 UTC</td>
+                        <td>confirmed-unpaid</td>
+                        <td>NULL</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>07/04/2077 17:56 UTC</td>
+                        <td>placed</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <br />
-    <h2>Update</h2>
+    <!--insert row-->
+        <br />
+        <h2>Insert</h2>
+        <form> 
+            <div class="form-group row">
+                <label class="col-auto col-form-label">manufacturer_id   <input type="text" name="manufacturer_id" value="" /></label>
+                <label class="col-auto col-form-label">shipper_id <input type="text" name="shipper_id" value="" /></label>
+                <label class="col-auto col-form-label">time_placed <input type="datetime-local" name="time_placed" value="" /></label>
+            </div>
+            <div class="form-group row">
+                <label for="orderStatusSelect" class="col-auto col-form-label">status </label>
+                    <select class="form-control w-25" id="orderStatusSelect">
+                        <option selected></option>
+                        <option>placed</option>
+                        <option>confirmed-unpaid</option>
+                        <option>confirmed-paid</option>
+                        <option>fulfilled-unpaid</option>
+                        <option>fulfilled-paid</option>
+                    </select>
+                
+                <label class="col-auto col-form-label">warehouse_id <input type="text" name="warehouse_id" value="" /></label>
+                <input type="button" id="newRow" value="Insert Order" class="btn btn-primary"/>
+            </div>
+            <form id="insertOrder">
+        </form>
 
-    <form class="form-inline">
-        <div class="form-group">
-            <label>order_id</label>
-            <select class="form-control" id="orderID">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-            </select>
-            <label>manufacturer_id<input type="text" name="manufacturer_id" value="" disabled/></label>
-            <label>shipper_id<input type="text" name="shipper_id" value="" /></label>
-            <label>time_placed<input type="datetime-local" name="time_placed" value="" disabled/></label>
-            <label>status</label>
-            <select class="form-control" id="orderStatusSelect">
-                <option selected></option>
-                <option>placed</option>
-                <option>confirmed-unpaid</option>
-                <option>confirmed-paid</option>
-                <option>fulfilled-unpaid</option>
-                <option>fulfilled-paid</option>
-            </select>
+        <br />
+        <h2>Update</h2>
+        <form>
+            <div class="form-group row">
+                <label class="col-auto col-form-label">order_id</label>
+                    <select class="form-control w-25" id="orderID">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                <label class="col-auto col-form-label">manufacturer_id  <input type="text" name="manufacturer_id" value="" disabled/></label>
+                <label class="col-auto col-form-label">shipper_id   <input type="text" name="shipper_id" value="" /></label>
+            </div> 
+            <div class="form-group row">
+                    <label class="col-auto col-form-label">time_placed  <input type="datetime-local" name="time_placed" value="" disabled/></label>
+                    <label for="orderStatusSelect" class="col-auto col-form-label">status</label>
+                        <select class="form-control w-25" id="orderStatusSelect">
+                            <option selected></option>
+                            <option>placed</option>
+                            <option>confirmed-unpaid</option>
+                            <option>confirmed-paid</option>
+                            <option>fulfilled-unpaid</option>
+                            <option>fulfilled-paid</option>
+                        </select>
 
-            <label>warehouse_id<input type="text" name="warehouse_id" value="" /></label>
-            <input type="button" id="newRow" value="Update Order" class="btn btn-primary btn-block"/>
-        </div>
-        <form id="updateOrder">
-    </form>
-    
-    <!-- bootstrap javascript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                    <label class="col-auto col-form-label">warehouse_id <input type="text" name="warehouse_id" value="" /></label>
+                    <input type="button" id="newRow" value="Update Order" class="btn btn-primary mb-2"/>
+            </div>
+            <form id="updateOrder">
+        </form>
+        
+        <!-- bootstrap javascript -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>

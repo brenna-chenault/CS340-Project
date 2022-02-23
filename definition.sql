@@ -2,6 +2,47 @@
 --database definitions 
 
 -- create tables
+DROP TABLE IF EXISTS `Orders`;
+CREATE TABLE `Orders` (
+    `order_id` int(11) NOT NULL AUTO_INCREMENT,
+    `manufacturer_id` int(11) NOT NULL,
+    `shipper_id` int(11),
+    `time_placed` TIMESTAMP NOT NULL,
+    `status` ENUM('placed', 'confirmed-unpaid', 'confirmed-paid', 'fulfilled-unpaid', 'fulfilled-paid') NOT NULL,
+    `warehouse_id` int(11),
+
+    PRIMARY KEY (`order_id`)
+    CONSTRAINT `order_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`),
+    CONSTRAINT `order_fk2` FOREIGN KEY (`shipper_id`) REFERENCES `Shippers` (`shipper_id`),
+    CONSTRAINT `order_fk3` FOREIGN KEY (`warehouse_id`) REFERENCES `Warehouses` (`warehouse_id`)
+);
+
+DROP TABLE IF EXISTS `Ordered_Products`;
+CREATE TABLE `Ordered_Products` (
+    `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
+    `order_id` int(11) NOT NULL,
+    `product_id` int(11) NOT NULL,
+    `number_ordered` int(11) NOT NULL,
+    `ordered_cost` int(11) NOT NULL,
+
+    PRIMARY KEY (`order_id`)
+    CONSTRAINT `ordered_product_fk1` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`order_id`),
+    CONSTRAINT `ordered_product_fk2` FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`)
+);
+
+DROP TABLE IF EXISTS `Products`;
+CREATE TABLE `Products` (
+    `product_id` int(11) NOT NULL AUTO_INCREMENT,
+    `manufacturer_id` int(11) NOT NULL,
+    `product_name` varchar(255) NOT NULL,
+    `product_type` ENUM('skateboards', 'crutches', 'shirts') NOT NULL,
+    `product_cost` int(11) NOT NULL,
+    `product_description` varchar(255) NOT NULL,
+
+    PRIMARY KEY (`product_id`)
+    CONSTRAINT `product_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`)
+);
+
 CREATE TABLE `Warehouses` (
     `warehouse_id` int(11) AUTO_INCREMENT,
     `street_address` varchar(255) NOT NULL,
@@ -35,6 +76,7 @@ CREATE TABLE `Shippers` (
     PRIMARY KEY (`shipper_id`)
 );
 
+
 -- instert into tables
 INSERT INTO Warehouses (street_address, city, state, zip) VALUES ('4390 Skateboard Lane', 'Houston', 'Texas', '77001');
 INSERT INTO Warehouses (street_address, city, state, zip) VALUES ('201 Band Street', 'Seattle', 'Washington', '98101');
@@ -53,3 +95,18 @@ INSERT INTO Shippers (shipper_name, shipper_account_num, shipper_contact_name, s
 VALUES ('UPS', '234890-A32', 'John Person', 'jperson@ups.com');
 INSERT INTO Shippers (shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email)
 VALUES ('DHL', '987235987', 'Some Name', 'some.name@DHL.com');
+
+INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) 
+VALUES (2, 'Sick Air Unisex Tee', 'shirts', 24.99, 'blue tee with coughing skater sizes S-3XL'),
+VALUES (1, 'Radtronic 1800z', 'skateboards', 493.52, 'can''t do ollies'),
+VALUES (3, 'Sensible Titanium Crutches', 'crutches', 50000.01, 'FSA eligible');
+
+INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status, warehouse_id) 
+VALUES (2, NULL, '2022-02-01 23:19:11',	'confirmed-paid', NULL),
+VALUES (1, 1, '2002-01-01 13:15:15', 'confirmed-unpaid',	NULL),
+VALUES (3, 3, '2077-07-04 17:56:09', 'placed', 2);
+
+INSERT INTO Ordered_Products (order_id, product_id, number_ordered, ordered_cost)
+VALUES (1, 2, 465, 11620.35),
+VALUES (3, 1, 8, 3948.16),
+VALUES (2, 3, 19455, 972750194.55);

@@ -38,9 +38,8 @@ VALUES (:input_order_id, :input_product_id, :input_number_ordered, :input_ordere
 -- update an Order's shipper_id, status, and warehouse_id based on the update Order form
 UPDATE Orders SET shipper_id = :input_shipper_id, status= :input_status_from_dropdown, warehouse_id = :input_warehouse_id, WHERE id= :order_id_from_update;
 
--- delete a Product and also delete that product from any existing Orders containing it
+-- delete a Product from any existing Orders containing it
 DELETE FROM Products WHERE product_id = :selected_product_id
-DELETE FROM Ordered_Products WHERE product_id = :selected_product_id
 
 -- remove a Product from an Order
 DELETE FROM Ordered_Products WHERE order_product_id = :selected_order_product_id

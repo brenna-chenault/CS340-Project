@@ -40,7 +40,7 @@ CREATE TABLE `Products` (
     `product_description` varchar(255) NOT NULL,
 
     PRIMARY KEY (`product_id`)
-    CONSTRAINT `product_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`)
+    CONSTRAINT `product_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `Warehouses` (

@@ -1,5 +1,5 @@
---music band distributor
---database definitions 
+-- music band distributor
+-- database definitions 
 
 -- create tables
 DROP TABLE IF EXISTS `Orders`;
@@ -11,7 +11,7 @@ CREATE TABLE `Orders` (
     `status` ENUM('placed', 'confirmed-unpaid', 'confirmed-paid', 'fulfilled-unpaid', 'fulfilled-paid') NOT NULL,
     `warehouse_id` int(11),
 
-    PRIMARY KEY (`order_id`)
+    PRIMARY KEY (`order_id`),
     CONSTRAINT `order_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`),
     CONSTRAINT `order_fk2` FOREIGN KEY (`shipper_id`) REFERENCES `Shippers` (`shipper_id`),
     CONSTRAINT `order_fk3` FOREIGN KEY (`warehouse_id`) REFERENCES `Warehouses` (`warehouse_id`)
@@ -25,7 +25,7 @@ CREATE TABLE `Ordered_Products` (
     `number_ordered` int(11) NOT NULL,
     `ordered_cost` int(11) NOT NULL,
 
-    PRIMARY KEY (`order_id`)
+    PRIMARY KEY (`order_id`),
     CONSTRAINT `ordered_product_fk1` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`order_id`),
     CONSTRAINT `ordered_product_fk2` FOREIGN KEY (`product_id`) REFERENCES `Products` (`product_id`)
 );
@@ -39,7 +39,7 @@ CREATE TABLE `Products` (
     `product_cost` int(11) NOT NULL,
     `product_description` varchar(255) NOT NULL,
 
-    PRIMARY KEY (`product_id`)
+    PRIMARY KEY (`product_id`),
     CONSTRAINT `product_fk1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturers` (`manufacturer_id`) ON DELETE CASCADE
 );
 
@@ -98,15 +98,15 @@ VALUES ('DHL', '987235987', 'Some Name', 'some.name@DHL.com');
 
 INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) 
 VALUES (2, 'Sick Air Unisex Tee', 'shirts', 24.99, 'blue tee with coughing skater sizes S-3XL'),
-VALUES (1, 'Radtronic 1800z', 'skateboards', 493.52, 'can''t do ollies'),
-VALUES (3, 'Sensible Titanium Crutches', 'crutches', 50000.01, 'FSA eligible');
+ (1, 'Radtronic 1800z', 'skateboards', 493.52, 'can''t do ollies'),
+ (3, 'Sensible Titanium Crutches', 'crutches', 50000.01, 'FSA eligible');
 
 INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status, warehouse_id) 
 VALUES (2, NULL, '2022-02-01 23:19:11',	'confirmed-paid', NULL),
-VALUES (1, 1, '2002-01-01 13:15:15', 'confirmed-unpaid',	NULL),
-VALUES (3, 3, '2077-07-04 17:56:09', 'placed', 2);
+ (1, 1, '2002-01-01 13:15:15', 'confirmed-unpaid',	NULL),
+ (3, 3, '2077-07-04 17:56:09', 'placed', 2);
 
 INSERT INTO Ordered_Products (order_id, product_id, number_ordered, ordered_cost)
 VALUES (1, 2, 465, 11620.35),
-VALUES (3, 1, 8, 3948.16),
-VALUES (2, 3, 19455, 972750194.55);
+ (3, 1, 8, 3948.16),
+ (2, 3, 19455, 972750194.55);

@@ -1,5 +1,5 @@
---music band distributor
---database definitions 
+-- music band distributor
+-- database definitions 
 
 -- remove old tables
 DROP TABLE IF EXISTS `Ordered_Products`;

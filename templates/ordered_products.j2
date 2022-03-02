@@ -55,43 +55,29 @@
                 <th>number_ordered</th>
                 <th>ordered_cost</th>
             </thead>
-            <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
             <tbody id="orderedProductsEntries">
+                {% for val in order_prod_data %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>465</td>
-                    <td>11,620.35</td>
+                    <td>{{val['order_product_id']}} </td>
+                    <td>{{val['order_id']}} </td>
+                    <td>{{val['product_id']}} </td>
+                    <td>{{val['number_ordered']}} </td>
+                    <td>{{val['ordered_cost']}} </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>8</td>
-                    <td>3,948.16</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>19,455</td>
-                    <td>972,750,194.55</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
         
     <!--insert row-->
         <br />
         <h2>Insert</h2>
-        
-        <form>
+        <form method="post">
             <div class="form-group">
                 <label>order_id  <input type="text" name="order_id" value="" /></label>
                 <label>product_id  <input type="text" name="product_id" value="" /></label>
                 <label>number_ordered  <input type="number" name="number_ordered" value="" /></label>
                 <label>ordered_cost  <input type="number" name="ordered_cost" value="" /></label>
-                <input type="button" id="newRow" value="Insert Ordered_Product" class="btn btn-primary"/>
+                <input type="submit" name="insert_order_product_submit" id="newRow" value="Insert Ordered_Product" class="btn btn-primary"/>
             </div>
             <form id="insertOrderedProduct">
         </form>

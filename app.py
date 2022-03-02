@@ -86,6 +86,47 @@ def orders():
         return render_template("orders.j2", order_data = orders_table, order_nums = order_nums)
 
 
+# Products
+@app.route('/products.html', methods=["POST", "GET"])
+def products():
+    """ 
+    Route for the Products page. Has Create, Read, and Delete functionality.
+    """
+    # Add a Product to the database 
+    if request.method == "POST":                    
+        if request.form.get("insert_product_submit"):
+            manufacturer_id = request.form["manufacturer_id"]
+            product_name = request.form["product_name"]
+            product_type = request.form["product_type"]
+            product_cost = request.form["product_cost"]
+            product_description = request.form["product_description"]
+
+            # No NULLable attributes
+            query = "INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) VALUES (%s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (manufacturer_id, product_name, product_type, product_cost, product_description))
+            mysql.connection.commit()
+
+            # redirect back to people page
+            return redirect("/products.html")
+
+    # Get data to display in table and delete dropdown
+    if request.method == "GET":
+        # Query to populate table
+        query_table = "SELECT * FROM Products"
+        cur = mysql.connection.cursor()
+        cur.execute(query_table)
+        prod_table = cur.fetchall()
+    
+        # Query to fill delete dropdown with product_id
+        query_id_dropdown = "SELECT order_id FROM Orders"
+        cur = mysql.connection.cursor()
+        cur.execute(query_id_dropdown)
+        prod_nums = cur.fetchall()
+
+        # Render the Products page with the fetched data
+        return render_template("products.j2", prod_data = prod_table, prod_nums = prod_nums)
+
 
 
 

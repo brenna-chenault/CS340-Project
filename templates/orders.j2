@@ -56,7 +56,6 @@
                     <th>status</th>
                     <th>warehouse_id</th>
                 </thead>
-                <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
                 <tbody id="ordersEntries">
                     {% for val in order_data %}
                     <tr>
@@ -90,7 +89,6 @@
                         <option>fulfilled-unpaid</option>
                         <option>fulfilled-paid</option>
                     </select>
-                
                 <label class="col-auto col-form-label">warehouse_id <input type="text" id="warehouse_id" name="warehouse_id" value="" /></label>
                 <input type="submit" id="newRow" name="insert_order_submit" value="Insert Order" class="btn btn-primary"/>
             </div>

@@ -118,7 +118,7 @@ def products():
         prod_table = cur.fetchall()
     
         # Query to fill delete dropdown with product_id
-        query_id_dropdown = "SELECT order_id FROM Orders"
+        query_id_dropdown = "SELECT product_id FROM Products"
         cur = mysql.connection.cursor()
         cur.execute(query_id_dropdown)
         prod_nums = cur.fetchall()

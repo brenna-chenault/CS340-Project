@@ -89,8 +89,9 @@
                 <label for="deleteOrderProductID" class="col-form-label">order_product_id</label>
                     <select multiple class="form-control w-25" id="deleteOrderProductID">
                         <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                        {% for val in order_prod_nums |sort(attribute='order_product_id') %}
+                            <option>{{val['order_product_id']}}</option>
+                        {% endfor %}
                     </select>
                     <br />
                 <input type="button" id="newRow" value="Delete Ordered_Product" class="btn btn-primary"/>

@@ -101,9 +101,9 @@
             <div class="form-group row">
                 <label class="col-auto col-form-label">order_id</label>
                     <select class="form-control w-25" id="orderID">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    {% for val in order_nums | sort(attribute='order_id') %}
+                        <option>{{val['order_id']}}</option>
+                    {% endfor %}
                     </select>
                 <label class="col-auto col-form-label">manufacturer_id  <input type="text" id="manufacturer_id" name="manufacturer_id" value="" disabled/></label>
                 <label class="col-auto col-form-label">shipper_id   <input type="text" name="shipper_id" value="" /></label>

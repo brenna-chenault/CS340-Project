@@ -93,16 +93,17 @@
 
         <br />
         <h2>Delete Row</h2>
-        <form>
+        <form method = "get">
             <div class="form-group">
                 <label for="">product_id</label>
                 <select multiple class="form-control w-25" id="">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                {% for val in prod_nums | sort(attribute='product_id') %}
+                    <option>{{val['product_id']}}</option>
+                {% endfor %}
                 </select>
+                
             </br>
-                <input type="button" id="newRow" value="Delete Product" class="btn btn-primary"/>
+                <input type="submit" id="newRow" value="Delete Product" class="btn btn-primary"/>
             </div>
             <form id="deleteProduct">
         </form>

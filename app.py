@@ -293,5 +293,4 @@ def warehouses():
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 3568))
-    app.run(port=port, debug=True)
+    app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

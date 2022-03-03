@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect
-import os
 from flask_mysqldb import MySQL
 from flask import request
 
@@ -8,9 +7,9 @@ app = Flask(__name__)
 
 # database connection - from template
 app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
-app.config["MYSQL_USER"] = "cs340_chenaulb"
-app.config["MYSQL_PASSWORD"] = "7566"
-app.config["MYSQL_DB"] = "cs340_chenaulb"
+app.config["MYSQL_USER"] = "cs340_liumar"
+app.config["MYSQL_PASSWORD"] = "3794"
+app.config["MYSQL_DB"] = "cs340_liumar"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)

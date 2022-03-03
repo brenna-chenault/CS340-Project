@@ -29,7 +29,7 @@ VALUES (:input_warehouse_address, :input_warehouse_city, :input_warehouse_state,
 
 -- insert into Products
 INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) 
-VALUES (:input_manufacturer_id, :input_product_name, :input, product_type, :input_product_cost, :input_product_description);
+VALUES (:input_manufacturer_id, :input_product_name, :input product_type, :input_product_cost, :input_product_description);
 
 -- insert into Orders
 INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status, warehouse_id) 
@@ -40,7 +40,7 @@ INSERT INTO Ordered_Products (order_id, product_id, number_ordered, ordered_cost
 VALUES (:input_order_id, :input_product_id, :input_number_ordered, :input_ordered_cost);
 
 -- update an Order's shipper_id, status, and warehouse_id based on the update Order form
-UPDATE Orders SET shipper_id = :input_shipper_id, status= :input_status_from_dropdown, warehouse_id = :input_warehouse_id, WHERE id= :order_id_from_update;
+UPDATE Orders SET shipper_id = :input_shipper_id, status= :input_status_from_dropdown, warehouse_id = :input_warehouse_id, WHERE order_id= :order_id_from_update;
 
 -- delete a Product from any existing Orders containing it
 DELETE FROM Products WHERE product_id = :selected_product_id

@@ -268,7 +268,7 @@ def warehouses():
     if request.method == "GET":
             
         # Query to populate table with all warehouse data
-        if state_option is None or state_option == "Show+All+States":
+        if state_option is None or state_option == "Show All States":
             query_table = "SELECT * FROM Warehouses"
             cur = mysql.connection.cursor()
             cur.execute(query_table)

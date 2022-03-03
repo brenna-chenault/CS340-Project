@@ -44,71 +44,54 @@
     </nav>
    
     <!-- table of data-->
-    <br />
-    <h2>Manufacturers Table</h2>
-    <table id="manufacturersTable" class="table table-hover">
-        <thead>
-            <th>manufacturer_id</th>
-            <th>manufacturer_name</th>
-            <th>email</th>
-            <th>phone_number</th>
-            <th>street_address</th>
-            <th>city</th>
-            <th>state</th>
-            <th>zip</th>
-        </thead>
-        <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
-        <tbody id="manufacturersEntries">
-            <tr>
-                <th scope="row">1</th>
-                <td>Cool Wheelz Skateboards</td>
-                <td>info@coolwheelz.com</td>
-                <td>999-999-9999</td>
-                <td>201 Wheelz Circle</td>
-                <td>Los Angeles</td>
-                <td>California</td>
-                <td>90001</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Just Shirtz</td>
-                <td>office@justzhirtz.com</td>
-                <td>888-888-8888</td>
-                <td>101 Main Street</td>
-                <td>Cleveland</td>
-                <td>Ohio</td>
-                <td>44101</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>A+ Bulk Medical Supply</td>
-                <td>design@aplusmeds.com</td>
-                <td>777-777-7777</td>
-                <td>201 Ouch Lane</td>
-                <td>Corvallis</td>
-                <td>Oregon</td>
-                <td>97330</td>
-            </tr>
-        </tbody>
-    </table>
-    
-<!--insert row-->
-    <br />
-    <h2>Insert</h2>
-    
-    <form>
-        <div class="form-group">
-            <label>manufacturer_name<input type="text" name="manufacturer_name" value="" /></label>
-            <label>email<input type="text" name="email" value="" /></label>
-            <label>phone_number<input type="text" name="phone_number" value="" /></label>
-            <label>street_address<input type="text" name="street_address" value="" /></label>
-            <label>city<input type="text" name="city" value="" /></label>
-            <label>state<input type="text" name="state" value="" /></label>
-            <label>zip<input type="text" name="zip" value="" /></label>
-            <input type="button" id="newRow" value="Insert Manufacturer" class="btn btn-primary"/>
-        </div>
-        <form id="insertWarehouse">
-    </form>
+    <div class="ml-5">
+        <br />
+        <h2>Manufacturers Table</h2>
+        <table id="manufacturersTable" class="table table-hover w-75">
+            <thead>
+                <th>manufacturer_id</th>
+                <th>manufacturer_name</th>
+                <th>email</th>
+                <th>phone_number</th>
+                <th>street_address</th>
+                <th>city</th>
+                <th>state</th>
+                <th>zip</th>
+            </thead>
+            <!-- sample table body, will be built though DOM and a GET / SELECT on page load -->
+            <tbody id="manufacturersEntries">
+                {% for val in man_data %}
+                <tr>
+                    <td>{{val['manufacturer_id']}} </td>
+                    <td>{{val['manufacturer_name']}} </td>
+                    <td>{{val['email']}} </td>
+                    <td>{{val['phone_number']}} </td>
+                    <td>{{val['street_address']}} </td>
+                    <td>{{val['city']}} </td>
+                    <td>{{val['state']}} </td>
+                    <td>{{val['zip']}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    <!--insert row-->
+        <br />
+        <h2>Insert</h2>
+        <form method = "post">
+            <div class="form-group">
+                <label>manufacturer_name<input type="text" name="manufacturer_name" value="" /></label>
+                <label>email<input type="text" name="email" value="" /></label>
+                <label>phone_number<input type="text" name="phone_number" value="" /></label>
+                <label>street_address<input type="text" name="street_address" value="" /></label>
+                <label>city<input type="text" name="city" value="" /></label>
+                <label>state<input type="text" name="state" value="" /></label>
+                <label>zip<input type="text" name="zip" value="" /></label>
+                <input type="submit" name="insert_manufacturer_submit"  id="newRow" value="Insert Manufacturer" class="btn btn-primary"/>
+            </div>
+            <form id="insertManufacturer">
+        </form>
+    </div>
 
     <!-- bootstrap javascript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -75,16 +75,22 @@
         <h2>Insert</h2>
         <form method = "post">
             <div class="form-group row">
-                <label class="col-auto col-form-label">manufacturer_id <input type="text" name="manufacturer_id" value="" /></label>
+                <label class="col-auto col-form-label">manufacturer_id </label>
+                    <select class="form-control w-25" id="" name="manufacturer_id">
+                        <option selected></option>
+                        {% for val in mid_dropdown | sort(attribute='manufacturer_id') %}
+                            <option>{{val['manufacturer_id']}}</option>
+                        {% endfor %}
+                    </select>
                 <label class="col-auto col-form-label">product_name <input type="text" name="product_name" value="" /></label>
-                <label for="productTypeSelect" class="col-auto col-form-label">product_type </label>
+                <label class="col-auto col-form-label">product_type </label>
                     <select class="form-control w-25" id="productTypeSelect" name="product_type">
                         <option selected></option>
                         <option>skateboards</option>
                         <option>shirts</option>
                         <option>crutches</option>
                     </select>
-                <label class="col-auto col-form-label">product_cost <input type="number" name="product_cost" value="" /></label>
+                <label class="col-auto col-form-label">product_cost <input type="number" min=0 name="product_cost" value="" /></label>
                 <label class="col-auto col-form-label">product_description <input type="text" name="product_description" value="" /></label>
                 <input type="submit" name="insert_product_submit" id="newRow" value="Insert Product" class="btn btn-primary"/>
             </div>

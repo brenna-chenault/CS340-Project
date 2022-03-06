@@ -65,10 +65,10 @@ def orders():
                 cur.execute(query, (manufacturer_id, shipper_id, time_placed, status, warehouse_id))
                 mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Orders page
             return redirect("/orders.html")
 
-    # Get data to display in table and update dropdown
+    # Get data to display in table and insert/update dropdowns
     if request.method == "GET":
         # Query to populate table
         query_table = "SELECT * FROM Orders"
@@ -82,8 +82,27 @@ def orders():
         cur.execute(query_id_dropdown)
         order_nums = cur.fetchall()
 
+        # Query to fill insert dropdown with manufacturer_id
+        query_mid_dropdown = "SELECT manufacturer_id FROM Manufacturers"
+        cur = mysql.connection.cursor()
+        cur.execute(query_mid_dropdown)
+        order_mid_dropdown = cur.fetchall()
+
+        # Query to fill insert/update dropdown with shipper_id
+        query_sid_dropdown = "SELECT shipper_id FROM Shippers"
+        cur = mysql.connection.cursor()
+        cur.execute(query_sid_dropdown)
+        order_sid_dropdown = cur.fetchall()
+
+        # Query to fill insert/update dropdown with warehouse_id
+        query_wid_dropdown = "SELECT warehouse_id FROM Warehouses"
+        cur = mysql.connection.cursor()
+        cur.execute(query_wid_dropdown)
+        order_wid_dropdown = cur.fetchall()
+
         # Render the Orders page with the fetched data
-        return render_template("orders.j2", order_data = orders_table, order_nums = order_nums)
+        return render_template("orders.j2", order_data = orders_table, order_nums = order_nums, 
+                    order_mid_dropdown = order_mid_dropdown, order_sid_dropdown = order_sid_dropdown, order_wid_dropdown = order_wid_dropdown )
 
 # Products
 @app.route('/products.html', methods=["POST", "GET"])
@@ -106,7 +125,7 @@ def products():
             cur.execute(query, (manufacturer_id, product_name, product_type, product_cost, product_description))
             mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Products page
             return redirect("/products.html")
 
     # Get data to display in table and delete dropdown
@@ -123,8 +142,14 @@ def products():
         cur.execute(query_id_dropdown)
         prod_nums = cur.fetchall()
 
+        # Query to fill insert dropdown with manufacturer_id
+        mid_dropdown = "SELECT manufacturer_id FROM Manufacturers"
+        cur = mysql.connection.cursor()
+        cur.execute(mid_dropdown)
+        mid_dropdown = cur.fetchall()
+
         # Render the Products page with the fetched data
-        return render_template("products.j2", prod_data = prod_table, prod_nums = prod_nums)
+        return render_template("products.j2", prod_data = prod_table, prod_nums = prod_nums, mid_dropdown = mid_dropdown)
 
 # Ordered_Products
 @app.route('/ordered_products.html', methods=["POST", "GET"])
@@ -146,7 +171,7 @@ def ordered_products():
             cur.execute(query, (order_id, product_id, number_ordered, ordered_cost))
             mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Ordered_Products page
             return redirect("/ordered_products.html")
 
     # Get data to display in table and delete dropdown
@@ -157,14 +182,26 @@ def ordered_products():
         cur.execute(query_table)
         order_prod_table = cur.fetchall()
     
-        # Query to fill delete dropdown with product_id
+        # Query to fill delete dropdown with order_product_id
         query_id_dropdown = "SELECT order_product_id FROM Ordered_Products"
         cur = mysql.connection.cursor()
         cur.execute(query_id_dropdown)
         order_prod_nums = cur.fetchall()
 
-        # Render the Products page with the fetched data
-        return render_template("ordered_products.j2", order_prod_data = order_prod_table, order_prod_nums = order_prod_nums)
+        # Query to fill insert dropdown with order_id
+        ord_id_dropdown = "SELECT order_id FROM Orders"
+        cur = mysql.connection.cursor()
+        cur.execute(ord_id_dropdown)
+        oid_dropdown = cur.fetchall()
+
+        # Query to fill insert dropdown with product_id
+        prod_id_dropdown = "SELECT product_id FROM Products"
+        cur = mysql.connection.cursor()
+        cur.execute(prod_id_dropdown)
+        pid_dropdown = cur.fetchall()
+
+        # Render the Ordered_Products page with the fetched data
+        return render_template("ordered_products.j2", order_prod_data = order_prod_table, order_prod_nums = order_prod_nums, pid_dropdown = pid_dropdown, oid_dropdown = oid_dropdown)
 
 # Manufacturers
 @app.route('/manufacturers.html', methods=["POST", "GET"])
@@ -189,7 +226,7 @@ def manufacturers():
             cur.execute(query, (manufacturer_name, email, phone_number, street_address, city, state, zip))
             mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Manufacturers page
             return redirect("/manufacturers.html")
 
     # Get data to display in table
@@ -200,7 +237,7 @@ def manufacturers():
         cur.execute(query_table)
         man_table = cur.fetchall()
 
-        # Render the Products page with the fetched data
+        # Render the Manufacturers page with the fetched data
         return render_template("manufacturers.j2", man_data = man_table)
 
 # Shippers
@@ -223,7 +260,7 @@ def shippers():
             cur.execute(query, (shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email))
             mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Shippers page
             return redirect("/shippers.html")
 
     # Get data to display in table
@@ -234,7 +271,7 @@ def shippers():
         cur.execute(query_table)
         ship_table = cur.fetchall()
 
-        # Render the Products page with the fetched data
+        # Render the Shippers page with the fetched data
         return render_template("shippers.j2", ship_data = ship_table)
 
 # Warehouses
@@ -261,7 +298,7 @@ def warehouses():
             cur.execute(query, (street_address, city, state, zip))
             mysql.connection.commit()
 
-            # redirect back to people page
+            # redirect back to Warehouses page
             return redirect("/warehouses.html")
 
     # Get data to display in table
@@ -287,9 +324,10 @@ def warehouses():
         cur.execute(query_id_dropdown)
         state_list = cur.fetchall()
 
-        # Render the Products page with the fetched data
+        # Render the Warehouses page with the fetched data
         return render_template("warehouses.j2", ware_data = ware_table, state_data = state_list)
 
 # Listener
 if __name__ == "__main__":
-    app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)
+    app.run(port=5000, debug=True)
+   # app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

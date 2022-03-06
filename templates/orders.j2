@@ -75,8 +75,20 @@
         <h2>Insert</h2>
         <form method = "post"> 
             <div class="form-group row">
-                <label class="col-auto col-form-label">manufacturer_id   <input type="text" id="manufacturer_id" name="manufacturer_id" value="" /></label>
-                <label class="col-auto col-form-label">shipper_id <input type="text" id="shipper_id" name="shipper_id" value="" /></label>
+                <label class="col-auto col-form-label">manufacturer_id </label>
+                    <select class="form-control w-25" id="" name="manufacturer_id">
+                        <option selected></option>
+                        {% for val in order_mid_dropdown | sort(attribute='manufacturer_id') %}
+                            <option>{{val['manufacturer_id']}}</option>
+                        {% endfor %}
+                    </select>
+                <label class="col-auto col-form-label">shipper_id </label>
+                    <select class="form-control w-25" id="" name="shipper_id">
+                        <option selected></option>
+                        {% for val in order_sid_dropdown | sort(attribute='shipper_id') %}
+                            <option>{{val['shipper_id']}}</option>
+                        {% endfor %}
+                    </select>
                 <label class="col-auto col-form-label">time_placed <input type="datetime-local"  id="time_placed" name="time_placed" value="" /></label>
             </div>
             <div class="form-group row">
@@ -89,7 +101,13 @@
                         <option>fulfilled-unpaid</option>
                         <option>fulfilled-paid</option>
                     </select>
-                <label class="col-auto col-form-label">warehouse_id <input type="text" id="warehouse_id" name="warehouse_id" value="" /></label>
+                <label class="col-auto col-form-label">warehouse_id </label>
+                    <select class="form-control w-25" id="" name="warehouse_id">
+                        <option selected></option>
+                        {% for val in order_wid_dropdown | sort(attribute='warehouse_id') %}
+                            <option>{{val['warehouse_id']}}</option>
+                        {% endfor %}
+                    </select>
                 <input type="submit" id="newRow" name="insert_order_submit" value="Insert Order" class="btn btn-primary"/>
             </div>
             <form id="insertOrder">
@@ -106,7 +124,13 @@
                     {% endfor %}
                     </select>
                 <label class="col-auto col-form-label">manufacturer_id  <input type="text" id="manufacturer_id" name="manufacturer_id" value="" disabled/></label>
-                <label class="col-auto col-form-label">shipper_id   <input type="text" name="shipper_id" value="" /></label>
+                <label class="col-auto col-form-label">shipper_id </label>
+                    <select class="form-control w-25" id="" name="update_order_shipper_id">
+                        <option selected></option>
+                        {% for val in order_sid_dropdown | sort(attribute='shipper_id') %}
+                            <option>{{val['shipper_id']}}</option>
+                        {% endfor %}
+                    </select>
             </div> 
             <div class="form-group row">
                     <label class="col-auto col-form-label">time_placed  <input type="datetime-local" name="time_placed" value="" disabled/></label>
@@ -120,7 +144,13 @@
                             <option>fulfilled-paid</option>
                         </select>
 
-                    <label class="col-auto col-form-label">warehouse_id <input type="text" name="warehouse_id" value="" /></label>
+                    <label class="col-auto col-form-label">warehouse_id </label>
+                        <select class="form-control w-25" id="" name="update_order_warehouse_id">
+                            <option selected></option>
+                            {% for val in order_wid_dropdown | sort(attribute='warehouse_id') %}
+                                <option>{{val['warehouse_id']}}</option>
+                            {% endfor %}
+                        </select>
                     <input type="button" id="newRow" value="Update Order" class="btn btn-primary mb-2"/>
             </div>
             <form id="updateOrder">

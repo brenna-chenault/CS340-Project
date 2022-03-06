@@ -72,11 +72,23 @@
         <br />
         <h2>Insert</h2>
         <form method="post">
-            <div class="form-group">
-                <label>order_id  <input type="text" name="order_id" value="" /></label>
-                <label>product_id  <input type="text" name="product_id" value="" /></label>
-                <label>number_ordered  <input type="number" name="number_ordered" value="" /></label>
-                <label>ordered_cost  <input type="number" name="ordered_cost" value="" /></label>
+            <div class="form-group row">
+                <label class="col-auto col-form-label">order_id </label>
+                    <select class="form-control w-25" id="insertOrderId" name="order_id">
+                        <option selected></option>
+                        {% for val in oid_dropdown | sort(attribute='order_id') %}
+                            <option>{{val['order_id']}}</option>
+                        {% endfor %}
+                    </select>
+                <label class="col-auto col-form-label">product_id</label>
+                    <select class="form-control w-25" id="insertProdId" name="product_id">
+                        <option selected></option>
+                        {% for val in pid_dropdown | sort(attribute='product_id') %}
+                            <option>{{val['product_id']}}</option>
+                        {% endfor %}
+                    </select>
+                <label>number_ordered  <input type="number" min=1 name="number_ordered" value="" /></label>
+                <label>ordered_cost  <input type="number" name="ordered_cost" min=0 value="" /></label>
                 <input type="submit" name="insert_order_product_submit" id="newRow" value="Insert Ordered_Product" class="btn btn-primary"/>
             </div>
             <form id="insertOrderedProduct">

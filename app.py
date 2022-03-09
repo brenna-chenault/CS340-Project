@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 # database connection - from template
 app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
-app.config["MYSQL_USER"] = "cs340_liumar"
-app.config["MYSQL_PASSWORD"] = "3794"
-app.config["MYSQL_DB"] = "cs340_liumar"
+app.config["MYSQL_USER"] = "cs340_chenaulb"
+app.config["MYSQL_PASSWORD"] = "7566"
+app.config["MYSQL_DB"] = "cs340_chenaulb"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
@@ -110,8 +110,10 @@ def products():
     """ 
     Route for the Products page. Has Create, Read, and Delete functionality.
     """
-    # Add a Product to the database 
+    # Add or delete a Product
     if request.method == "POST":                    
+        
+        # Add form POST request
         if request.form.get("insert_product_submit"):
             manufacturer_id = request.form["manufacturer_id"]
             product_name = request.form["product_name"]
@@ -125,8 +127,16 @@ def products():
             cur.execute(query, (manufacturer_id, product_name, product_type, product_cost, product_description))
             mysql.connection.commit()
 
-            # redirect back to Products page
-            return redirect("/products.html")
+        # Delete form POST request
+        if request.form.get("delete_product_submit"):
+            product_id = request.form["product_id"]
+            query = "DELETE FROM Products WHERE product_id = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (product_id))
+            mysql.connection.commit()
+
+        # redirect back to Products page
+        return redirect("/products.html")
 
     # Get data to display in table and delete dropdown
     if request.method == "GET":
@@ -157,8 +167,10 @@ def ordered_products():
     """ 
     Route for the Ordered_Products page. Has Create, Read, and Delete functionality.
     """
-    # Add an Ordered_Product to the database 
-    if request.method == "POST":                    
+    # Add or delete an Ordered_Product to the database 
+    if request.method == "POST":
+
+        # Add form POST request                 
         if request.form.get("insert_order_product_submit"):
             order_id = request.form["order_id"]
             product_id = request.form["product_id"]
@@ -171,8 +183,16 @@ def ordered_products():
             cur.execute(query, (order_id, product_id, number_ordered, ordered_cost))
             mysql.connection.commit()
 
-            # redirect back to Ordered_Products page
-            return redirect("/ordered_products.html")
+        # Delete form POST request
+        if request.form.get("delete_order_product_submit"):
+            order_product_id = request.form["order_product_id"]
+            query = "DELETE FROM Ordered_Products WHERE order_product_id = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (order_product_id))
+            mysql.connection.commit()
+
+        # redirect back to Ordered_Products page
+        return redirect("/ordered_products.html")
 
     # Get data to display in table and delete dropdown
     if request.method == "GET":
@@ -329,5 +349,5 @@ def warehouses():
 
 # Listener
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=3568, debug=True)
    # app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

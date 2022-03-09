@@ -96,16 +96,16 @@
         
         <br />
         <h2>Delete Row</h2>
-        <form>
+        <form method="post">
             <div class="form-group">
                 <label for="deleteOrderProductID" class="col-form-label">order_product_id</label>
-                    <select multiple class="form-control w-25" id="deleteOrderProductID">
+                    <select multiple class="form-control w-25" name="order_product_id" id="deleteOrderProductID">
                         {% for val in order_prod_nums |sort(attribute='order_product_id') %}
                             <option>{{val['order_product_id']}}</option>
                         {% endfor %}
                     </select>
                     <br />
-                <input type="button" id="newRow" value="Delete Ordered_Product" class="btn btn-primary"/>
+                <input type="submit" name="delete_order_product_submit" id="newRow" value="Delete Ordered_Product" class="btn btn-primary"/>
             </div>
             <form id="deleteOrderedProduct">
         </form>

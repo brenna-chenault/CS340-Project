@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 # database connection - from template
 app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
-app.config["MYSQL_USER"] = "cs340_liumar"
-app.config["MYSQL_PASSWORD"] = "3794"
-app.config["MYSQL_DB"] = "cs340_liumar"
+app.config["MYSQL_USER"] = "cs340_chenaulb"
+app.config["MYSQL_PASSWORD"] = "7566"
+app.config["MYSQL_DB"] = "cs340_chenaulb"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
@@ -30,7 +30,7 @@ def orders():
     """
     # Add or update an Order to the database 
     if request.method == "POST":                    
-        if request.form.update("insert_order_submit"):
+        if request.form.get("insert_order_submit"):
             manufacturer_id = request.form["manufacturer_id"]
             shipper_id = request.form["shipper_id"]
             time_placed = request.form["time_placed"]
@@ -66,7 +66,7 @@ def orders():
                 mysql.connection.commit()
 
         # Update data associated with the given order_id
-        if request.form.update("update_order_submit"):
+        if request.form.get("update_order_submit"):
             order_id = request.form["update_order_id"]
             shipper_id = request.form["update_order_shipper_id"]
             status = request.form["update_order_status"]
@@ -252,14 +252,15 @@ def manufacturers():
             state = request.form["state"]
             zip = request.form["zip"]
 
-            # No NULLable attributes
-            query = "INSERT INTO Manufacturers (manufacturer_name, email, phone_number, street_address, city, state, zip) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [manufacturer_name, email, phone_number, street_address, city, state, zip])
-            mysql.connection.commit()
+            # No NULLable attributes, run the query if user provided all data
+            if manufacturer_name and email and phone_number and street_address and city and state and zip:
+                query = "INSERT INTO Manufacturers (manufacturer_name, email, phone_number, street_address, city, state, zip) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [manufacturer_name, email, phone_number, street_address, city, state, zip])
+                mysql.connection.commit()
 
-            # redirect back to Manufacturers page
-            return redirect("/manufacturers.html")
+        # redirect back to Manufacturers page
+        return redirect("/manufacturers.html")
 
     # Get data to display in table
     if request.method == "GET":
@@ -286,14 +287,15 @@ def shippers():
             shipper_contact_name = request.form["shipper_contact_name"]
             shipper_contact_email = request.form["shipper_contact_email"]
 
-            # No NULLable attributes
-            query = "INSERT INTO Shippers (shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email) VALUES (%s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email])
-            mysql.connection.commit()
+            # No NULLable attributes, run the query if user provided all data
+            if shipper_name and shipper_account_num and shipper_contact_name and shipper_contact_email:
+                query = "INSERT INTO Shippers (shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email) VALUES (%s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [shipper_name, shipper_account_num, shipper_contact_name, shipper_contact_email])
+                mysql.connection.commit()
 
-            # redirect back to Shippers page
-            return redirect("/shippers.html")
+        # redirect back to Shippers page
+        return redirect("/shippers.html")
 
     # Get data to display in table
     if request.method == "GET":
@@ -318,20 +320,22 @@ def warehouses():
 
     # Add a Warehouse to the database
     if request.method == "POST":                    
+        
         if request.form.get("insert_warehouse_submit"):
             street_address = request.form["street_address"]
             city = request.form["city"]
             state = request.form["state"]
             zip = request.form["zip"]
 
-            # No NULLable attributes
-            query = "INSERT INTO Warehouses (street_address, city, state, zip) VALUES (%s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [street_address, city, state, zip])
-            mysql.connection.commit()
+            # No NULLable attributes, run the query if user provided all data
+            if street_address and city and state and zip:
+                query = "INSERT INTO Warehouses (street_address, city, state, zip) VALUES (%s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [street_address, city, state, zip])
+                mysql.connection.commit()
 
-            # redirect back to Warehouses page
-            return redirect("/warehouses.html")
+        # redirect back to Warehouses page
+        return redirect("/warehouses.html")
 
     # Get data to display in table
     if request.method == "GET":
@@ -361,6 +365,6 @@ def warehouses():
 
 # Listener
 if __name__ == "__main__":
-    app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)
+    app.run(host="flip1.engr.oregonstate.edu", port=3568, debug=True)
 
    # app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 # database connection - from template
 app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
-app.config["MYSQL_USER"] = "cs340_chenaulb"
-app.config["MYSQL_PASSWORD"] = "7566"
-app.config["MYSQL_DB"] = "cs340_chenaulb"
+app.config["MYSQL_USER"] = "cs340_liumar"
+app.config["MYSQL_PASSWORD"] = "3794"
+app.config["MYSQL_DB"] = "cs340_liumar"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
@@ -37,33 +37,36 @@ def orders():
             status = request.form["status"]
             warehouse_id = request.form["warehouse_id"]
 
-            # NULL shipper_id AND warehouse_id
-            if shipper_id == "" and warehouse_id == "":
-                query = "INSERT INTO Orders (manufacturer_id, time_placed, status) VALUES (%s, %s, %s)"
-                cur = mysql.connection.cursor()
-                cur.execute(query, [manufacturer_id, time_placed, status])
-                mysql.connection.commit()
 
-            # NULL shipper_id only
-            elif shipper_id == "":
-                query = "INSERT INTO Orders (manufacturer_id, time_placed, status, warehouse_id) VALUES (%s, %s, %s, %s)"
-                cur = mysql.connection.cursor()
-                cur.execute(query, [manufacturer_id, time_placed, status, warehouse_id])
-                mysql.connection.commit()
+            if manufacturer_id != "" and time_placed != "" and status != "":
+                # NULL shipper_id AND warehouse_id
 
-            # NULL warehouse_id only
-            elif warehouse_id == "":
-                query = "INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status) VALUES (%s, %s, %s, %s)"
-                cur = mysql.connection.cursor()
-                cur.execute(query, [manufacturer_id, shipper_id, time_placed, status])
-                mysql.connection.commit()
+                if shipper_id == "" and warehouse_id == "":
+                    query = "INSERT INTO Orders (manufacturer_id, time_placed, status) VALUES (%s, %s, %s)"
+                    cur = mysql.connection.cursor()
+                    cur.execute(query, [manufacturer_id, time_placed, status])
+                    mysql.connection.commit()
 
-            # All input fields given
-            else:
-                query = "INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status, warehouse_id) VALUES (%s, %s, %s, %s, %s)"
-                cur = mysql.connection.cursor()
-                cur.execute(query, [manufacturer_id, shipper_id, time_placed, status, warehouse_id])
-                mysql.connection.commit()
+                # NULL shipper_id only
+                elif shipper_id == "":
+                    query = "INSERT INTO Orders (manufacturer_id, time_placed, status, warehouse_id) VALUES (%s, %s, %s, %s)"
+                    cur = mysql.connection.cursor()
+                    cur.execute(query, [manufacturer_id, time_placed, status, warehouse_id])
+                    mysql.connection.commit()
+
+                # NULL warehouse_id only
+                elif warehouse_id == "":
+                    query = "INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status) VALUES (%s, %s, %s, %s)"
+                    cur = mysql.connection.cursor()
+                    cur.execute(query, [manufacturer_id, shipper_id, time_placed, status])
+                    mysql.connection.commit()
+
+                # All input fields given
+                else:
+                    query = "INSERT INTO Orders (manufacturer_id, shipper_id, time_placed, status, warehouse_id) VALUES (%s, %s, %s, %s, %s)"
+                    cur = mysql.connection.cursor()
+                    cur.execute(query, [manufacturer_id, shipper_id, time_placed, status, warehouse_id])
+                    mysql.connection.commit()
 
         # Update data associated with the given order_id
         if request.form.get("update_order_submit"):
@@ -72,10 +75,32 @@ def orders():
             status = request.form["update_order_status"]
             warehouse_id = request.form["update_order_warehouse_id"]
 
-            query = "UPDATE Orders SET shipper_id = %s, status= %s, warehouse_id = %s, WHERE order_id = %s"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [order_id, shipper_id, status, warehouse_id])
-            mysql.connection.commit()
+            if shipper_id == "" and warehouse_id == "":
+                    query = "UPDATE Orders SET status=%s WHERE order_id=%s"
+                    cur = mysql.connection.cursor()
+                    cur.execute(query, [status, order_id])
+                    mysql.connection.commit()
+
+            # NULL shipper_id only
+            elif shipper_id == "":
+                query = "UPDATE Orders SET status=%s, warehouse_id=%s WHERE order_id=%s"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [status, warehouse_id, order_id])
+                mysql.connection.commit()
+
+            # NULL warehouse_id only
+            elif warehouse_id == "":
+                query = "UPDATE Orders SET shipper_id=%s, status=%s WHERE order_id=%s"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [shipper_id, status, order_id])
+                mysql.connection.commit()
+
+            # All input fields given
+            else:
+                query = "UPDATE Orders SET shipper_id=%s, status=%s, warehouse_id=%s WHERE order_id=%s"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [shipper_id, status, warehouse_id, order_id])
+                mysql.connection.commit()
 
         # redirect back to Orders page
         return redirect("/orders.html")
@@ -134,10 +159,11 @@ def products():
             product_description = request.form["product_description"]
 
             # No NULLable attributes
-            query = "INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) VALUES (%s, %s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [manufacturer_id, product_name, product_type, product_cost, product_description])
-            mysql.connection.commit()
+            if manufacturer_id != "" and product_name != "" and product_type != "" and product_cost != "" and product_description != "":
+                query = "INSERT INTO Products (manufacturer_id, product_name, product_type, product_cost, product_description) VALUES (%s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [manufacturer_id, product_name, product_type, product_cost, product_description])
+                mysql.connection.commit()
 
         # Delete form POST request
         if request.form.get("delete_product_submit"):
@@ -190,10 +216,11 @@ def ordered_products():
             ordered_cost = request.form["ordered_cost"]
 
             # No NULLable attributes
-            query = "INSERT INTO Ordered_Products (order_id, product_id, number_ordered, ordered_cost) VALUES (%s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, [order_id, product_id, number_ordered, ordered_cost])
-            mysql.connection.commit()
+            if order_id != "" and product_id != "" and number_ordered !="" and ordered_cost != "":
+                query = "INSERT INTO Ordered_Products (order_id, product_id, number_ordered, ordered_cost) VALUES (%s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, [order_id, product_id, number_ordered, ordered_cost])
+                mysql.connection.commit()
 
         # Delete form POST request
         if request.form.get("delete_order_product_submit"):
@@ -365,6 +392,6 @@ def warehouses():
 
 # Listener
 if __name__ == "__main__":
-    app.run(host="flip1.engr.oregonstate.edu", port=3568, debug=True)
+    app.run(port=5000, debug=True)
 
-   # app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)
+   #app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

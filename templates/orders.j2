@@ -77,7 +77,6 @@
             <div class="form-group row">
                 <label class="col-auto col-form-label">manufacturer_id </label>
                     <select class="form-control w-25" id="" name="manufacturer_id">
-                        <option selected></option>
                         {% for val in order_mid_dropdown | sort(attribute='manufacturer_id') %}
                             <option>{{val['manufacturer_id']}}</option>
                         {% endfor %}
@@ -94,7 +93,6 @@
             <div class="form-group row">
                 <label for="orderStatusSelect" class="col-auto col-form-label">status </label>
                     <select class="form-control w-25" id="orderStatusSelect" name="status">
-                        <option selected></option>
                         <option>placed</option>
                         <option>confirmed-unpaid</option>
                         <option>confirmed-paid</option>
@@ -115,15 +113,15 @@
 
         <br />
         <h2>Update</h2>
-        <form>
+        <form method = "post">
             <div class="form-group row">
                 <label class="col-auto col-form-label">order_id</label>
-                    <select class="form-control w-25" id="orderID">
+                    <select class="form-control w-25" id="orderID" name="update_order_id">
                     {% for val in order_nums | sort(attribute='order_id') %}
                         <option>{{val['order_id']}}</option>
                     {% endfor %}
                     </select>
-                <label class="col-auto col-form-label">manufacturer_id  <input type="text" id="manufacturer_id" name="manufacturer_id" value="" disabled/></label>
+                <label class="col-auto col-form-label">manufacturer_id  <input type="text" id="manufacturer_id" name="update_manufacturer_id" value="" disabled/></label>
                 <label class="col-auto col-form-label">shipper_id </label>
                     <select class="form-control w-25" id="" name="update_order_shipper_id">
                         <option selected></option>
@@ -133,17 +131,15 @@
                     </select>
             </div> 
             <div class="form-group row">
-                    <label class="col-auto col-form-label">time_placed  <input type="datetime-local" name="time_placed" value="" disabled/></label>
+                    <label class="col-auto col-form-label">time_placed  <input type="datetime-local" name="update_time_placed" value="" disabled/></label>
                     <label for="orderStatusSelect" class="col-auto col-form-label">status</label>
-                        <select class="form-control w-25" id="orderStatusSelect">
-                            <option selected></option>
+                        <select class="form-control w-25" id="orderStatusSelect" name="update_order_status">
                             <option>placed</option>
                             <option>confirmed-unpaid</option>
                             <option>confirmed-paid</option>
                             <option>fulfilled-unpaid</option>
                             <option>fulfilled-paid</option>
                         </select>
-
                     <label class="col-auto col-form-label">warehouse_id </label>
                         <select class="form-control w-25" id="" name="update_order_warehouse_id">
                             <option selected></option>
@@ -151,7 +147,7 @@
                                 <option>{{val['warehouse_id']}}</option>
                             {% endfor %}
                         </select>
-                    <input type="button" id="newRow" value="Update Order" class="btn btn-primary mb-2"/>
+                    <input type="submit" name="update_order_submit" id="newRow" value="Update Order" class="btn btn-primary mb-2"/>
             </div>
             <form id="updateOrder">
         </form>

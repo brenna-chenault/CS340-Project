@@ -79,7 +79,7 @@
                     <select class="form-control w-25" id="" name="manufacturer_id">
                         <option selected></option>
                         {% for val in mid_dropdown | sort(attribute='manufacturer_id') %}
-                            <option>{{val['manufacturer_id']}}</option>
+                            <option>{{val['manufacturer_id']}} - {{val['manufacturer_name']}}</option>
                         {% endfor %}
                     </select>
                 <label class="col-auto col-form-label">product_name <input type="text" name="product_name" value="" /></label>

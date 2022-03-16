@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 # database connection - from template
 app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
-app.config["MYSQL_USER"] = "cs340_liumar"
-app.config["MYSQL_PASSWORD"] = "3794"
-app.config["MYSQL_DB"] = "cs340_liumar"
+app.config["MYSQL_USER"] = "cs340_chenaulb"
+app.config["MYSQL_PASSWORD"] = "7566"
+app.config["MYSQL_DB"] = "cs340_chenaulb"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 mysql = MySQL(app)
@@ -120,19 +120,19 @@ def orders():
         order_nums = cur.fetchall()
 
         # Query to fill insert dropdown with manufacturer_id
-        query_mid_dropdown = "SELECT manufacturer_id FROM Manufacturers"
+        query_mid_dropdown = "SELECT manufacturer_id, manufacturer_name FROM Manufacturers"
         cur = mysql.connection.cursor()
         cur.execute(query_mid_dropdown)
         order_mid_dropdown = cur.fetchall()
 
         # Query to fill insert/update dropdown with shipper_id
-        query_sid_dropdown = "SELECT shipper_id FROM Shippers"
+        query_sid_dropdown = "SELECT shipper_id, shipper_name FROM Shippers"
         cur = mysql.connection.cursor()
         cur.execute(query_sid_dropdown)
         order_sid_dropdown = cur.fetchall()
 
         # Query to fill insert/update dropdown with warehouse_id
-        query_wid_dropdown = "SELECT warehouse_id FROM Warehouses"
+        query_wid_dropdown = "SELECT warehouse_id, city FROM Warehouses"
         cur = mysql.connection.cursor()
         cur.execute(query_wid_dropdown)
         order_wid_dropdown = cur.fetchall()
@@ -191,7 +191,7 @@ def products():
         prod_nums = cur.fetchall()
 
         # Query to fill insert dropdown with manufacturer_id
-        mid_dropdown = "SELECT manufacturer_id FROM Manufacturers"
+        mid_dropdown = "SELECT manufacturer_id, manufacturer_name FROM Manufacturers"
         cur = mysql.connection.cursor()
         cur.execute(mid_dropdown)
         mid_dropdown = cur.fetchall()
@@ -254,7 +254,7 @@ def ordered_products():
         oid_dropdown = cur.fetchall()
 
         # Query to fill insert dropdown with product_id
-        prod_id_dropdown = "SELECT product_id FROM Products"
+        prod_id_dropdown = "SELECT product_id, product_name FROM Products"
         cur = mysql.connection.cursor()
         cur.execute(prod_id_dropdown)
         pid_dropdown = cur.fetchall()
@@ -382,7 +382,7 @@ def warehouses():
             ware_table = cur.fetchall()
 
         # Query to fill filter select box with state
-        query_id_dropdown = "SELECT state FROM Warehouses"
+        query_id_dropdown = "SELECT DISTINCT state FROM Warehouses ORDER BY state ASC"
         cur = mysql.connection.cursor()
         cur.execute(query_id_dropdown)
         state_list = cur.fetchall()
@@ -392,6 +392,6 @@ def warehouses():
 
 # Listener
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=3568, debug=True)
 
    #app.run(host="flip2.engr.oregonstate.edu", port=32480, debug=True)

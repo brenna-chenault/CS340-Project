@@ -84,7 +84,7 @@
                     <select class="form-control w-25" id="insertProdId" name="product_id">
                         <option selected></option>
                         {% for val in pid_dropdown | sort(attribute='product_id') %}
-                            <option>{{val['product_id']}}</option>
+                            <option>{{val['product_id']}} - {{val['product_name']}}</option>
                         {% endfor %}
                     </select>
                 <label>number_ordered  <input type="number" min=1 name="number_ordered" value="" /></label>
